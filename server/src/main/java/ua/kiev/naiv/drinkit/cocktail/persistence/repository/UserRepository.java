@@ -1,7 +1,7 @@
-package ua.kiev.naiv.drinkit.cocktail.repository;
+package ua.kiev.naiv.drinkit.cocktail.persistence.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ua.kiev.naiv.drinkit.cocktail.model.User;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
 
 /**
  * Created with IntelliJ IDEA.

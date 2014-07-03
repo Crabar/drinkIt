@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.model;
+package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -21,7 +21,7 @@ public class CocktailType implements Serializable {
 
     private Integer id;
     private String name;
-    private Set<Recipe> recipes;
+    private Set<RecipeEntity> recipeEntities;
 
     public CocktailType() {
     }
@@ -50,11 +50,11 @@ public class CocktailType implements Serializable {
     }
 
     @OneToMany(mappedBy = "cocktailType")
-    public Set<Recipe> getRecipes() {
-        return recipes;
+    public Set<RecipeEntity> getRecipeEntities() {
+        return recipeEntities;
     }
 
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
+    public void setRecipeEntities(Set<RecipeEntity> recipeEntities) {
+        this.recipeEntities = recipeEntities;
     }
 }

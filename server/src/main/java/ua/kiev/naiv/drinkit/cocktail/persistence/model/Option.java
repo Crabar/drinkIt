@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.model;
+package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;

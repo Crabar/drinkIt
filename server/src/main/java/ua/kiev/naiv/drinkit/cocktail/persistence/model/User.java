@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.model;
+package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import javax.persistence.*;
 

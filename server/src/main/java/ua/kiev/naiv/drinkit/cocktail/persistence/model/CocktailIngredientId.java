@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.model;
+package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,16 +19,16 @@ import java.io.Serializable;
 public class CocktailIngredientId implements Serializable {
 
     @JsonIgnore
-    private Recipe recipe;
+    private RecipeEntity recipeEntity;
     private Ingredient ingredient;
 
     @ManyToOne
-    public Recipe getRecipe() {
-        return recipe;
+    public RecipeEntity getRecipeEntity() {
+        return recipeEntity;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setRecipeEntity(RecipeEntity recipeEntity) {
+        this.recipeEntity = recipeEntity;
     }
 
     @ManyToOne()
@@ -58,14 +58,14 @@ public class CocktailIngredientId implements Serializable {
         CocktailIngredientId that = (CocktailIngredientId) o;
 
         if (!ingredient.equals(that.ingredient)) return false;
-        if (!recipe.equals(that.recipe)) return false;
+        if (!recipeEntity.equals(that.recipeEntity)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = recipe.hashCode();
+        int result = recipeEntity.hashCode();
         result = 31 * result + ingredient.hashCode();
         return result;
     }

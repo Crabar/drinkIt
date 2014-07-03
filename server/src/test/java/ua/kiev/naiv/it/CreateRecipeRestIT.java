@@ -7,9 +7,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
-import ua.kiev.naiv.drinkit.cocktail.pojos.TransformTests;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
+import ua.kiev.naiv.drinkit.cocktail.web.model.TransformTests;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 
 /**
@@ -27,8 +26,8 @@ public class CreateRecipeRestIT {
     @Test
     @Rollback(value = false)
     public void createRecipe() {
-        Recipe recipe = cocktailService.create(new TransformTests().creteMockRecipeInput());
-        System.out.println(recipe);
+        cocktailService.create(new TransformTests().creteMockRecipeInput());
+        return;
     }
 
 //    protected Recipe createMockRecipe() {

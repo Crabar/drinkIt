@@ -1,35 +1,25 @@
-package ua.kiev.naiv.drinkit.cocktail.pojos;
-
-import ua.kiev.naiv.drinkit.cocktail.model.*;
+package ua.kiev.naiv.drinkit.cocktail.web.model;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * @author pkolmykov
  */
-public class RecipeInput {
+public class Recipe {
 
     private int cocktailTypeId;
     private String description;
     private String name;
     private int[] options;
     private int[][] cocktailIngredients;
+    private byte[] image;
 
-    public Recipe transform() {
-        Recipe recipe = new Recipe();
-        recipe.setName(name);
-        recipe.setDescription(description);
-        recipe.setOptions(Arrays.stream(options).<Option>mapToObj(Option::new).collect(Collectors.toSet()));
-        recipe.setCocktailType(new CocktailType(cocktailTypeId));
-        recipe.setIngredientsWithQuantities(Arrays.stream(cocktailIngredients).<IngredientWithQuantity>map(val -> {
-            IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
-            ingredientWithQuantity.setQuantity(val[1]);
-            ingredientWithQuantity.setRecipe(recipe);
-            ingredientWithQuantity.setIngredient(new Ingredient(val[0]));
-            return ingredientWithQuantity;
-        }).collect(Collectors.toSet()));
-        return recipe;
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public int getCocktailTypeId() {
@@ -77,7 +67,7 @@ public class RecipeInput {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RecipeInput that = (RecipeInput) o;
+        Recipe that = (Recipe) o;
 
         if (cocktailTypeId != that.cocktailTypeId) return false;
         if (!description.equals(that.description)) return false;
