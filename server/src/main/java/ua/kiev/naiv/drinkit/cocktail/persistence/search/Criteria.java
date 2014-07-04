@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.search;
+package ua.kiev.naiv.drinkit.cocktail.persistence.search;
 
 import java.util.Set;
 

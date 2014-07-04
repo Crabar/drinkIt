@@ -1,10 +1,9 @@
-package ua.kiev.naiv.drinkit.cocktail.repository;
+package ua.kiev.naiv.drinkit.cocktail.persistence.repository;
 
 import org.springframework.data.repository.Repository;
-import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.CocktailType;
 
 import java.util.List;
-import java.util.Set;
 
 public interface CocktailTypeRepository extends Repository<CocktailType, Integer> {
 

@@ -4,20 +4,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
-import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
-import ua.kiev.naiv.drinkit.cocktail.repository.CocktailTypeRepository;
-import ua.kiev.naiv.drinkit.cocktail.repository.IngredientRepository;
-import ua.kiev.naiv.drinkit.cocktail.repository.RecipeRepository;
-import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
-import ua.kiev.naiv.drinkit.cocktail.search.RecipeComparatorByCriteria;
-import ua.kiev.naiv.drinkit.cocktail.search.SearchSpecification;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.CocktailType;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteria;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils;
+import ua.kiev.naiv.drinkit.cocktail.persistence.repository.CocktailTypeRepository;
+import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
+import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
+import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
+import ua.kiev.naiv.drinkit.cocktail.persistence.search.SearchSpecification;
 import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
+import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils.transform;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,38 +40,44 @@ public class CocktailServiceImpl implements CocktailService {
     CocktailTypeRepository cocktailTypeRepository;
 
     @Override
-    public Recipe create(Recipe recipe) {
-        return recipeRepository.saveAndFlush(recipe);//todo add transformation
+    public int create(Recipe recipe) {
+        return recipeRepository.saveAndFlush(transform(recipe)).getId();
     }
 
     @Override
-    public Recipe delete(int id) {
+    public boolean delete(int id) {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
     public List<Recipe> findAll() {
-        return recipeRepository.findAll();
+        return recipeRepository.findAll().stream()
+                .map(TransformUtils::transform)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Recipe> findByCriteria(Criteria criteria) {
-        List<Recipe> recipes = recipeRepository.findAll(SearchSpecification.byCriteria(criteria));
-        if (criteria.getIngredients().size() > 0) {
-            Collections.sort(recipes, new RecipeComparatorByCriteria(criteria));
-        }
-        LOGGER.info("findByCriteria({}): found {} records", criteria, recipes.size());
-        return recipes;
+        return recipeRepository.findAll(SearchSpecification.byCriteria(criteria)).stream()
+                .sorted(new RecipeComparatorByCriteria(criteria))
+                .map(TransformUtils::transform)
+                .collect(Collectors.toList());
+//        List<Recipe> recipeEntities = recipeRepository.findAll(SearchSpecification.byCriteria(criteria));
+//        if (criteria.getIngredients().size() > 0) {
+//            Collections.sort(recipeEntities, new RecipeComparatorByCriteria(criteria));
+//        }
+//        LOGGER.info("findByCriteria({}): found {} records", criteria, recipeEntities.size());
+//        return recipeEntities;
     }
 
     @Override
-    public Recipe update(Recipe recipe) {
+    public boolean update(Recipe recipeEntity) {
         throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
     }
 
     @Override
-    public Recipe getById(int id) {
-        return recipeRepository.findOne(id);
+    public Recipe getRecipeById(int id) {
+        return transform(recipeRepository.findOne(id));
     }
 
     @Override

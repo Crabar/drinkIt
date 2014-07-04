@@ -1,12 +1,9 @@
-package ua.kiev.naiv.drinkit.cocktail.model;
-
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,28 +17,22 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "name")
 })
-public class Recipe implements Serializable {
+public class RecipeEntity implements Serializable {
 
     private Integer id;
     private String name;
     private String description;
-    @JsonProperty("cocktailTypeId")
-    @JsonIdentityReference(alwaysAsId = true)
     private CocktailType cocktailType;
     private Set<IngredientWithQuantity> ingredientsWithQuantities;
-    @JsonProperty("optionIds")
-    @JsonIdentityReference(alwaysAsId = true)
     private Set<Option> options;
     private byte[] image;
     private byte[] thumbnail;
 
     @Transient
     public Set<Integer> getIngredientIds() {
-        Set<Integer> result = new HashSet<>();
-        for (IngredientWithQuantity ingredientWithQuantity : getIngredientsWithQuantities()) {
-            result.add(ingredientWithQuantity.getIngredient().getId());
-        }
-        return result;
+        return getIngredientsWithQuantities().stream()
+                .map(ingredientWithQuantity -> ingredientWithQuantity.getIngredient().getId())
+                .collect(Collectors.toSet());
     }
 
     @Id
@@ -83,7 +74,7 @@ public class Recipe implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.recipe", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.PERSIST)
     public Set<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
