@@ -23,13 +23,6 @@ public class CocktailType implements Serializable {
     private String name;
     private Set<RecipeEntity> recipeEntities;
 
-    public CocktailType() {
-    }
-
-    public CocktailType(int id) {
-        this.id = id;
-    }
-
     @Id
     @Column(name = "id")
     public Integer getId() {

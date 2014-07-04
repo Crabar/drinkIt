@@ -1,9 +1,9 @@
 package ua.kiev.naiv.drinkit.cocktail.service;
 
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.CocktailType;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.model.CocktailType;
+import ua.kiev.naiv.drinkit.cocktail.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.search.Criteria;
 
 import java.util.List;
 
@@ -15,17 +15,17 @@ import java.util.List;
  */
 public interface CocktailService {
 
-    int create(Recipe recipe);
+    Recipe create(Recipe recipe);
 
-    boolean delete(int id);
+    Recipe delete(int id);
 
     List<Recipe> findAll();
 
     List<Recipe> findByCriteria(Criteria criteria);
 
-    boolean update(Recipe recipeEntity);
+    Recipe update(Recipe recipe);
 
-    Recipe getRecipeById(int id);
+    Recipe getById(int id);
 
     CocktailType findCocktailTypeById(int id);
 
