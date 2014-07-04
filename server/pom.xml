@@ -248,6 +248,8 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <executable>${env.OPENSHIFT_WILDFLY_DIR}usr/lib/jvm/jdk1.8.0_05/bin/javac</executable>
+                    <fork>true</fork>
                 </configuration>
             </plugin>
 
