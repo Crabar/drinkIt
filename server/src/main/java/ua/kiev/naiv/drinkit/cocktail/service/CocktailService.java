@@ -1,5 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.service;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.CocktailType;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
@@ -15,15 +16,18 @@ import java.util.List;
  */
 public interface CocktailService {
 
+    @PreAuthorize("hasRole(ROLE_ADMIN)")
     int create(Recipe recipe);
 
-    boolean delete(int id);
+    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    void delete(int id);
 
     List<Recipe> findAll();
 
     List<Recipe> findByCriteria(Criteria criteria);
 
-    boolean update(Recipe recipeEntity);
+    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    void update(int id, Recipe recipeEntity);
 
     Recipe getRecipeById(int id);
 

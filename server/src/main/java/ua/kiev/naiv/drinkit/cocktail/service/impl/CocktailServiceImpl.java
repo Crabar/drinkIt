@@ -3,11 +3,10 @@ package ua.kiev.naiv.drinkit.cocktail.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.CocktailType;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteria;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils;
+import ua.kiev.naiv.drinkit.cocktail.common.Role;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.*;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.CocktailTypeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
@@ -45,8 +44,8 @@ public class CocktailServiceImpl implements CocktailService {
     }
 
     @Override
-    public boolean delete(int id) {
-        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
+    public void delete(int id) {
+        recipeRepository.delete(id);
     }
 
     @Override
@@ -71,8 +70,10 @@ public class CocktailServiceImpl implements CocktailService {
     }
 
     @Override
-    public boolean update(Recipe recipeEntity) {
-        throw new IllegalStateException("Not implemented yet"); //TODO Not implemented
+    public void update(int id, Recipe recipe) {
+        RecipeEntity recipeEntity = transform(recipe);
+        recipeEntity.setId(id);
+        recipeRepository.saveAndFlush(recipeEntity);
     }
 
     @Override
