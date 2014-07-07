@@ -6,17 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
 
 import java.util.List;
 
 /**
- * @author pkolmykov
- */
+* @author pkolmykov
+*/
 @Controller
 public class CocktailController {
 
     @Autowired
-    private CocktailController cocktailService;
+    CocktailService cocktailService;
 
     @RequestMapping(value = "/ingredients", method = RequestMethod.GET)
     @ResponseBody
