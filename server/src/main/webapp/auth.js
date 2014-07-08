@@ -1,31 +1,35 @@
 /**
  * Created by Crabar on 22.05.2014.
  */
-var _action;
 
 function initOAuthIO() {
     OAuth.initialize('w5lnaZLTxqd0EeBl99PrcUK3UBo');
 }
 
-function socialLogin(provider, action) {
-    _action = action;
-    OAuth.popup(provider, getProfile);
+
+
+function socialLogin(provider) {
+    OAuth.popup(provider).done(function(result) {
+        result.me(['name', 'email', 'id']).done(function(me) {
+            document.client.onSocialLogin(me);
+        })
+    });
 }
 
 function onSuccessGetProfile(result) {
     document.client.onSocialLogin(result);
 }
 
-function getProfile(error, result) {
-    result.get(_action).done(onSuccessGetProfile);
+function getProfile(result) {
+    result.me().done(onSuccessGetProfile);
 }
 
-function sendRequest(method, address, params, headers, requestID) {
+function sendRequest(method, address, queryParams, bodyParams, headers, expectedStatus, expectedErrorStatus, requestID) {
     var xmlhttp = new XMLHttpRequest();
     var target;
 
-    if (params != "")
-        target = address + '?' + params;
+    if (queryParams != null)
+        target = address + '?' + queryParams;
     else
         target = address;
 
@@ -40,11 +44,14 @@ function sendRequest(method, address, params, headers, requestID) {
 
     xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == 4) {
-            if (xmlhttp.status == 200) {
+            if (xmlhttp.status == expectedStatus) {
                 document.client.onRequestComplete(xmlhttp.responseText, requestID);
             }
             else if (xmlhttp.status == 401) {
-                document.client.processAuth(xmlhttp.getResponseHeader('WWW-Authenticate'), method, address, params, requestID);
+                document.client.processAuth(xmlhttp.responseText, xmlhttp.getResponseHeader('WWW-Authenticate'), address, requestID);
+            }
+            else if (xmlhttp.status == expectedErrorStatus) {
+                document.client.onExpectedError(xmlhttp.responseText, requestID);
             }
             else {
                 document.client.onError(xmlhttp.responseText);
@@ -52,5 +59,5 @@ function sendRequest(method, address, params, headers, requestID) {
         }
     };
 
-    xmlhttp.send(params);
+    xmlhttp.send(bodyParams);
 }

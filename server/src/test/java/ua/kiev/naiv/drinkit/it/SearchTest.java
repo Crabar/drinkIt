@@ -1,28 +1,28 @@
-package ua.kiev.naiv.it;
-
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.springconfig.AppConfig;
-
-/**
- * Created with IntelliJ IDEA.
- * User: Pavel Kolmykov
- * Date: 22.07.13
- * Time: 21:41
- */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = AppConfig.class)
-public class SearchTest extends AbstractTransactionalJUnit4SpringContextTests{
-
-    private final static String CRITERIA_JSON_PATH = "json/request/search.json";
-
-    @Autowired
-    RecipeService recipeService;
-
+//package ua.kiev.naiv.it;
+//
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.test.context.ContextConfiguration;
+//import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
+//import ua.kiev.naiv.drinkit.springconfig.AppConfig;
+//
+///**
+// * Created with IntelliJ IDEA.
+// * User: Pavel Kolmykov
+// * Date: 22.07.13
+// * Time: 21:41
+// */
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(classes = AppConfig.class)
+//public class SearchTest extends AbstractTransactionalJUnit4SpringContextTests{
+//
+//    private final static String CRITERIA_JSON_PATH = "json/request/search.json";
+//
+//    @Autowired
+//    RecipeService ingredientService;
+//
 //    @Test
 //    public void readAndSerializeJsonIntoCriteria() throws IOException {
 //        ObjectMapper objectMapper = new ObjectMapper();
@@ -52,4 +52,4 @@ public class SearchTest extends AbstractTransactionalJUnit4SpringContextTests{
 //        System.out.println(iter.next().getId());
 //        return;
 //    }
-}
+//}

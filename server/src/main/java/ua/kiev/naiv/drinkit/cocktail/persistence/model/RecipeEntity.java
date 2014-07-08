@@ -2,7 +2,8 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -23,16 +24,16 @@ public class RecipeEntity implements Serializable {
     private String name;
     private String description;
     private CocktailType cocktailType;
-    private Set<IngredientWithQuantity> ingredientsWithQuantities;
-    private Set<Option> options;
+    private List<IngredientWithQuantity> ingredientsWithQuantities;
+    private List<Option> options;
     private byte[] image;
     private byte[] thumbnail;
 
     @Transient
-    public Set<Integer> getIngredientIds() {
+    public List<Integer> getIngredientIds() {
         return getIngredientsWithQuantities().stream()
                 .map(ingredientWithQuantity -> ingredientWithQuantity.getIngredient().getId())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Id
@@ -75,11 +76,11 @@ public class RecipeEntity implements Serializable {
     }
 
     @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.PERSIST)
-    public Set<IngredientWithQuantity> getIngredientsWithQuantities() {
+    public List<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
 
-    public void setIngredientsWithQuantities(Set<IngredientWithQuantity> ingredientsWithQuantities) {
+    public void setIngredientsWithQuantities(List<IngredientWithQuantity> ingredientsWithQuantities) {
         this.ingredientsWithQuantities = ingredientsWithQuantities;
     }
 
@@ -87,11 +88,11 @@ public class RecipeEntity implements Serializable {
     @JoinTable(name = "recipes_has_options",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id"))
-    public Set<Option> getOptions() {
+    public List<Option> getOptions() {
         return options;
     }
 
-    public void setOptions(Set<Option> options) {
+    public void setOptions(List<Option> options) {
         this.options = options;
     }
 

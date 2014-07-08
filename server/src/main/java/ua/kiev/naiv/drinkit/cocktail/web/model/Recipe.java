@@ -13,6 +13,7 @@ public class Recipe {
     private int[] options;
     private int[][] cocktailIngredients;
     private byte[] image;
+    private byte[] thumbnail;
 
     public byte[] getImage() {
         return image;
@@ -62,17 +63,27 @@ public class Recipe {
         return cocktailIngredients;
     }
 
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Recipe that = (Recipe) o;
+        Recipe recipe = (Recipe) o;
 
-        if (cocktailTypeId != that.cocktailTypeId) return false;
-        if (!description.equals(that.description)) return false;
-        if (!name.equals(that.name)) return false;
-        if (!Arrays.equals(options, that.options)) return false;
+        if (cocktailTypeId != recipe.cocktailTypeId) return false;
+        if (!description.equals(recipe.description)) return false;
+        if (!Arrays.equals(image, recipe.image)) return false;
+        if (!name.equals(recipe.name)) return false;
+        if (!Arrays.equals(options, recipe.options)) return false;
+        if (!Arrays.equals(thumbnail, recipe.thumbnail)) return false;
 
         return true;
     }
@@ -83,6 +94,19 @@ public class Recipe {
         result = 31 * result + description.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + Arrays.hashCode(options);
+        result = 31 * result + (image != null ? Arrays.hashCode(image) : 0);
+        result = 31 * result + (thumbnail != null ? Arrays.hashCode(thumbnail) : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "cocktailIngredients=" + Arrays.toString(cocktailIngredients) +
+                ", options=" + Arrays.toString(options) +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cocktailTypeId=" + cocktailTypeId +
+                '}';
     }
 }

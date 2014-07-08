@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * @author pkolmykov
  */
-public class IngredientMixIn {
+public abstract class IngredientMixIn {
     @JsonIgnore
     private Set<IngredientWithQuantity> cocktailIngredients;
 }

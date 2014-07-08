@@ -11,7 +11,7 @@
     Learn more about Flex at http://flex.org 
     // -->
     <head>
-        <title>client</title>
+        <title>drinkIt</title>
         <meta name="google" value="notranslate" />         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
@@ -29,11 +29,11 @@
         </style>
         
         <!-- Enable Browser History by replacing useBrowserHistory tokens with two hyphens -->
-        <!-- BEGIN Browser History required section ${useBrowserHistory}>
+        <!-- BEGIN Browser History required section -->
      
         <link rel="stylesheet" type="text/css" href="history/history.css" />
         <script type="text/javascript" src="history/history.js"></script>
-        <!${useBrowserHistory} END Browser History required section -->  
+        <!-- END Browser History required section -->  
 
         <script type="text/javascript" src="oauth.js"></script>
         <script type="text/javascript" src="auth.js"></script>
@@ -43,7 +43,7 @@
             var swfVersionStr = "9.0.0";
             // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
             var xiSwfUrlStr = "${expressInstallSwf}";
-            var flashvars = {"serviceAddress":"http://naiv.kiev.ua:8080/"};
+            var flashvars = {"serviceAddress":""};
             var params = {};
             params.quality = "high";
             params.bgcolor = "#869ca7";

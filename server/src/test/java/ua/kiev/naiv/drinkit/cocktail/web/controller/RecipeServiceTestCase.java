@@ -1,8 +1,7 @@
-package ua.kiev.naiv.rest;
+package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,27 +13,24 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.controller.RecipeController;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ua.kiev.naiv.drinkit.MockObjectsGenerator.createMockCriteria;
+import static ua.kiev.naiv.drinkit.MockObjectsGenerator.creteMockRecipe;
 
 /**
  * @author pkolmykov
  */
 @RunWith(MockitoJUnitRunner.class)
-public class CocktailServiceTests {
+public class RecipeServiceTestCase {
 
     @InjectMocks
     RecipeController recipeController = new RecipeController();
@@ -65,7 +61,7 @@ public class CocktailServiceTests {
 
 //    @Test   //todo move + move test to controller package
 //    public void getIngredientsShouldReturnValidResult() throws Exception {
-//        when(recipeService.getIngredients()).thenReturn(Arrays.asList(new Ingredient()));
+//        when(service.getIngredients()).thenReturn(Arrays.asList(new Ingredient()));
 //        ResultActions resultActions = mockMvc.perform(get("/ingredients"));
 //        resultActions
 //                .andExpect(status().isOk())
@@ -86,12 +82,12 @@ public class CocktailServiceTests {
                 .andExpect(content().string(objectMapper.writeValueAsString(Arrays.asList(creteMockRecipe()))));
     }
 
-    @Test
-    @Ignore
-    public void deleteRecipeShouldReturnException() throws Exception {
-        doThrow(new RuntimeException("RecordNotFound")).when(recipeService).delete(0);
-        mockMvc.perform(delete("/cocktails/0"));
-    }
+//    @Test
+//    @Ignore
+//    public void deleteRecipeShouldReturnException() throws Exception {
+//        doThrow(new RuntimeException("RecordNotFound")).when(recipeService).delete(0);
+//        mockMvc.perform(delete("/cocktails/0"));
+//    }
 
     @Test
     public void deleteRecipeShouldReturn200() throws Exception {
@@ -116,21 +112,5 @@ public class CocktailServiceTests {
                 .andExpect(content().string("1"));
     }
 
-
-    private Recipe creteMockRecipe() {
-        Recipe recipe = new Recipe();
-        recipe.setCocktailTypeId(1);
-        recipe.setDescription("desc");
-        recipe.setName("Test2");
-        recipe.setOptions(new int[]{1, 2});
-        recipe.setCocktailIngredients(new int[][]{{1, 50}, {2, 60}});
-        return recipe;
-    }
-
-    private Criteria createMockCriteria() {
-        return new Criteria(new HashSet<>(Arrays.asList(1)),
-                new HashSet<>(Arrays.asList(1)),
-                new HashSet<>(Arrays.asList(1)));
-    }
 
 }
