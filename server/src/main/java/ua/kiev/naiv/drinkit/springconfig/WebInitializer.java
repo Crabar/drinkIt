@@ -2,6 +2,9 @@ package ua.kiev.naiv.drinkit.springconfig;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import ua.kiev.naiv.drinkit.cocktail.common.WebContextFilter;
+
+import javax.servlet.Filter;
 
 /**
  * Created with IntelliJ IDEA.
@@ -26,8 +29,9 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new String[]{"/rest/*"};
     }
 
-//    @Override
-//    protected Filter[] getServletFilters() {
-//        return new Filter[]{new WebContextFilter()};
-//    }
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new WebContextFilter()};
+    }
+
 }

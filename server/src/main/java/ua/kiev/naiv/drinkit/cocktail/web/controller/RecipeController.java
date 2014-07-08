@@ -9,9 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
-import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
+import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.io.IOException;
@@ -30,13 +29,13 @@ public class RecipeController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
 
 	@Autowired
-	CocktailService cocktailService;
+    RecipeService recipeService;
 
 	@RequestMapping(value = "/{cocktailId}", method = RequestMethod.GET)
 	@ResponseBody
     @Transactional(readOnly = true)
 	public Recipe getRecipeById(@PathVariable int cocktailId) {
-		return cocktailService.getRecipeById(cocktailId);
+		return recipeService.getRecipeById(cocktailId);
 	}
 
     @RequestMapping(method = RequestMethod.POST)
@@ -44,7 +43,7 @@ public class RecipeController {
 //    @ResponseStatus(HttpStatus.OK)
 //    @ResponseBody
     public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe){
-        return new HttpEntity<>(cocktailService.create(recipe));
+        return new HttpEntity<>(recipeService.create(recipe));
     }
 
 
@@ -61,18 +60,18 @@ public class RecipeController {
 			return null;
 		}
 
-		return cocktailService.findByCriteria(criteria);
+		return recipeService.findByCriteria(criteria);
 	}
 
     @RequestMapping(value = "{recipeId}", method = RequestMethod.DELETE)
     public void deleteRecipe(@PathVariable int recipeId){
-        cocktailService.delete(recipeId);
+        recipeService.delete(recipeId);
     }
 
     @RequestMapping(value = "{recipeId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe){
-        cocktailService.update(recipeId, recipe);
+        recipeService.update(recipeId, recipe);
     }
 
 }

@@ -1,7 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
@@ -18,7 +17,6 @@ import java.io.Serializable;
 @Embeddable
 public class CocktailIngredientId implements Serializable {
 
-    @JsonIgnore
     private RecipeEntity recipeEntity;
     private Ingredient ingredient;
 

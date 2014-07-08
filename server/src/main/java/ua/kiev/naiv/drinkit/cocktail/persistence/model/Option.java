@@ -1,8 +1,5 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 
 /**
@@ -16,7 +13,6 @@ import javax.persistence.*;
         @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "option")
 })
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Option {
 
     private int id;

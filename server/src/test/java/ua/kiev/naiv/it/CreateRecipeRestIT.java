@@ -7,7 +7,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
+import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.TransformTests;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 
@@ -21,12 +21,12 @@ public class CreateRecipeRestIT {
 
 
     @Autowired
-    CocktailService cocktailService;
+    RecipeService recipeService;
 
     @Test
     @Rollback(value = false)
     public void createRecipe() {
-        cocktailService.create(new TransformTests().creteMockRecipeInput());
+        recipeService.create(new TransformTests().creteMockRecipeInput());
         return;
     }
 
@@ -45,7 +45,7 @@ public class CreateRecipeRestIT {
 //        Ingredient ingredient = cocktailService.getIngredients().get(0);
 //        ingredient.setCocktailIngredients(new HashSet<>(Arrays.asList(ingredientWithQuantity)));
 //        cocktailIngredientId.setIngredient(ingredient);
-//        cocktailIngredientId.setRecipe(recipe);
+//        cocktailIngredientId.setRecipeEntity(recipe);
 //        ingredientWithQuantity.setCocktailIngredientId(cocktailIngredientId);
 //        ingredientWithQuantity.setQuantity(50);
 //        recipe.setIngredientsWithQuantities(new HashSet<>(Arrays.asList(ingredientWithQuantity)));

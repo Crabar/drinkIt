@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import ua.kiev.naiv.drinkit.cocktail.service.CocktailService;
+import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 
 /**
@@ -21,7 +21,7 @@ public class SearchTest extends AbstractTransactionalJUnit4SpringContextTests{
     private final static String CRITERIA_JSON_PATH = "json/request/search.json";
 
     @Autowired
-    CocktailService cocktailService;
+    RecipeService recipeService;
 
 //    @Test
 //    public void readAndSerializeJsonIntoCriteria() throws IOException {

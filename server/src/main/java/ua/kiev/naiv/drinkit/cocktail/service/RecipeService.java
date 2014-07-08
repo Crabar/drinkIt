@@ -14,7 +14,7 @@ import java.util.List;
  * Date: 20.07.13
  * Time: 21:52
  */
-public interface CocktailService {
+public interface RecipeService {
 
     @PreAuthorize("hasRole(ROLE_ADMIN)")
     int create(Recipe recipe);
@@ -31,13 +31,10 @@ public interface CocktailService {
 
     Recipe getRecipeById(int id);
 
-    CocktailType findCocktailTypeById(int id);
+//    CocktailType findCocktailTypeById(int id);
 
 //    List<CocktailType> findAllCocktailType();
 
-    List<Ingredient> getIngredients();
-
-    Ingredient findIngredientById(int id);
 
 //    List<CocktailType> getCocktailTypes();
 }

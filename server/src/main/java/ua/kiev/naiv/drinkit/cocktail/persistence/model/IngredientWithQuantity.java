@@ -1,9 +1,5 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,14 +12,13 @@ import java.io.Serializable;
 @Entity
 @Table(name = "recipes_has_ingredients")
 @AssociationOverrides({
-        @AssociationOverride(name = "cocktailIngredientId.recipe",
+        @AssociationOverride(name = "cocktailIngredientId.recipeEntity",
                 joinColumns = @JoinColumn(name = "recipe_id")),
         @AssociationOverride(name = "cocktailIngredientId.ingredient",
                 joinColumns = @JoinColumn(name = "ingredient_id"))})
 public class IngredientWithQuantity implements Serializable {
 
     private Integer quantity;
-    @JsonIgnore
     private CocktailIngredientId cocktailIngredientId = new CocktailIngredientId();
 
     @EmbeddedId
@@ -45,8 +40,6 @@ public class IngredientWithQuantity implements Serializable {
     }
 
     @Transient
-    @JsonProperty("ingredientId")
-    @JsonIdentityReference(alwaysAsId = true)
     public Ingredient getIngredient() {
         return getCocktailIngredientId().getIngredient();
     }
@@ -56,12 +49,11 @@ public class IngredientWithQuantity implements Serializable {
     }
 
     @Transient
-    @JsonIgnore
-    public RecipeEntity getRecipe() {
+    public RecipeEntity getRecipeEntity() {
         return getCocktailIngredientId().getRecipeEntity();
     }
 
-    public void setRecipe(RecipeEntity recipeEntity) {
+    public void setRecipeEntity(RecipeEntity recipeEntity) {
         getCocktailIngredientId().setRecipeEntity(recipeEntity);
     }
 

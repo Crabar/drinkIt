@@ -1,9 +1,5 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -16,14 +12,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "ingredients")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Ingredient {
 
     private Integer id;
     private String name;
     private Integer vol;
     private String description;
-    @JsonIgnore
     private Set<IngredientWithQuantity> cocktailIngredients;
 
     public Ingredient() {
@@ -34,6 +28,7 @@ public class Ingredient {
     }
 
     @Id
+    @GeneratedValue
     @Column(name = "id")
     public Integer getId() {
         return id;

@@ -12,7 +12,18 @@ public class TransformUtils {
 
 
     public static Recipe transform(RecipeEntity recipeEntity) {
-        return null;
+        Recipe recipe = new Recipe();
+//        recipe.setImage(recipeEntity.getImage());
+        recipe.setCocktailTypeId(recipeEntity.getCocktailType().getId());
+        recipe.setDescription(recipeEntity.getDescription());
+        recipe.setName(recipeEntity.getName());
+        recipe.setCocktailIngredients(recipeEntity.getIngredientsWithQuantities().stream()
+                .<int[]>map(val -> new int[]{val.getIngredient().getId(), val.getQuantity()})
+                .toArray(int[][]::new));
+        recipe.setOptions(recipeEntity.getOptions().stream()
+                .mapToInt(Option::getId)
+                .toArray());
+        return recipe;
     }
 
     public static RecipeEntity transform(Recipe recipe) {
@@ -24,7 +35,7 @@ public class TransformUtils {
         recipeEntity.setIngredientsWithQuantities(Arrays.stream(recipe.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
             IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
             ingredientWithQuantity.setQuantity(val[1]);
-            ingredientWithQuantity.setRecipe(recipeEntity);
+            ingredientWithQuantity.setRecipeEntity(recipeEntity);
             ingredientWithQuantity.setIngredient(new Ingredient(val[0]));
             return ingredientWithQuantity;
         }).collect(Collectors.toSet()));

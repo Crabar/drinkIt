@@ -1,9 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -16,7 +13,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "recipe_types")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CocktailType implements Serializable {
 
     private Integer id;
