@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface JsonMixin {
+public @interface JsonMixIn {
     Class<?> value();
 
     Class<?> targetClass() default Object.class;

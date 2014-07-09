@@ -5,7 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ua.kiev.naiv.drinkit.cocktail.common.JsonMixin;
+import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.web.model.IngredientMixIn;
 
@@ -23,7 +23,7 @@ public class IngredientsController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    @JsonMixin(value = IngredientMixIn.class, targetClass = Ingredient.class)
+    @JsonMixIn(value = IngredientMixIn.class, targetClass = Ingredient.class)
     public List<Ingredient> getIngredients() {
         return ingredientService.getIngredients();
     }

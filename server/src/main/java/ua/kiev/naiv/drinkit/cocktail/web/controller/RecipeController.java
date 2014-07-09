@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import ua.kiev.naiv.drinkit.cocktail.common.JsonMixin;
+import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
@@ -52,7 +52,7 @@ public class RecipeController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	@ResponseBody
     @Transactional(readOnly = true)
-    @JsonMixin(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
+    @JsonMixIn(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
 	public List<Recipe> searchRecipes(@RequestParam(value = "criteria") String json) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Criteria criteria;
