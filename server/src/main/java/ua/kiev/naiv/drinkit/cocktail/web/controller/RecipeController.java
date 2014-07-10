@@ -26,7 +26,7 @@ import java.util.List;
  * Time: 13:54
  */
 @Controller
-@RequestMapping(value = "cocktails")
+@RequestMapping(value = "recipes")
 public class RecipeController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecipeController.class);
@@ -34,11 +34,11 @@ public class RecipeController {
 	@Autowired
     RecipeService recipeService;
 
-	@RequestMapping(value = "/{cocktailId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
 	@ResponseBody
     @Transactional(readOnly = true)
-	public Recipe getRecipeById(@PathVariable int cocktailId) {
-		return recipeService.getRecipeById(cocktailId);
+	public Recipe getRecipeById(@PathVariable int recipeId) {
+		return recipeService.getRecipeById(recipeId);
 	}
 
     @RequestMapping(method = RequestMethod.POST)

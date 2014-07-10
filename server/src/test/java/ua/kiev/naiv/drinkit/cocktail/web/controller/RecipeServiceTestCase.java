@@ -53,7 +53,7 @@ public class RecipeServiceTestCase {
     @Test
     public void getRecipeByIdShouldReturnValidRecipe() throws Exception {
         when(recipeService.getRecipeById(1)).thenReturn(creteMockRecipe());
-        ResultActions resultActions = mockMvc.perform(get("/cocktails/1"));
+        ResultActions resultActions = mockMvc.perform(get("/recipes/1"));
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
@@ -75,7 +75,7 @@ public class RecipeServiceTestCase {
         Criteria criteria = createMockCriteria();
         when(recipeService.findByCriteria(any()))//todo fix any to criteria
                 .thenReturn(Arrays.asList(creteMockRecipe()));
-        ResultActions resultActions = mockMvc.perform(get("/cocktails/search")
+        ResultActions resultActions = mockMvc.perform(get("/recipes/search")
         .param("criteria", objectMapper.writeValueAsString(criteria)));
         resultActions
                 .andExpect(status().isOk())
@@ -87,12 +87,12 @@ public class RecipeServiceTestCase {
 //    @Ignore
 //    public void deleteRecipeShouldReturnException() throws Exception {
 //        doThrow(new RuntimeException("RecordNotFound")).when(recipeService).delete(0);
-//        mockMvc.perform(delete("/cocktails/0"));
+//        mockMvc.perform(delete("/recipes/0"));
 //    }
 
     @Test
     public void deleteRecipeShouldReturn200() throws Exception {
-        mockMvc.perform(delete("/cocktails/1"))
+        mockMvc.perform(delete("/recipes/1"))
                 .andExpect(status().isOk());
     }
 
@@ -100,7 +100,7 @@ public class RecipeServiceTestCase {
     public void updateRecipeShouldReturn200() throws Exception {
         Recipe recipe = creteMockRecipe();
         recipe.setId(1);
-        mockMvc.perform(put("/cocktails/1")
+        mockMvc.perform(put("/recipes/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(recipe)))
                 .andExpect(status().isOk());
@@ -110,7 +110,7 @@ public class RecipeServiceTestCase {
     public void createRecipeShouldReturnId() throws Exception {
         when(recipeService.save(creteMockRecipe())).thenReturn(1);
         String json = objectMapper.writeValueAsString(creteMockRecipe());
-        mockMvc.perform(post("/cocktails").content(json).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(post("/recipes").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("1"));
     }
