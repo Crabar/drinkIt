@@ -73,4 +73,14 @@ public class Ingredient {
     public void setCocktailIngredients(Set<IngredientWithQuantity> ingredientWithQuantities) {
         this.cocktailIngredients = ingredientWithQuantities;
     }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", vol=" + vol +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

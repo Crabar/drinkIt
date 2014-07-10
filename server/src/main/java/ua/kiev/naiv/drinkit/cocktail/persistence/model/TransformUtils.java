@@ -23,8 +23,8 @@ public class TransformUtils {
         recipe.setDescription(recipeEntity.getDescription());
         recipe.setName(recipeEntity.getName());
         recipe.setCocktailIngredients(recipeEntity.getIngredientsWithQuantities().stream()
-                .<int[]>map(val -> new int[]{val.getIngredient().getId(), val.getQuantity()})
-                .toArray(int[][]::new));
+                .<Integer[]>map(val -> new Integer[]{val.getIngredient().getId(), val.getQuantity()})
+                .toArray(Integer[][]::new));
         recipe.setOptions(recipeEntity.getOptions().stream()
                 .mapToInt(Option::getId)
                 .toArray());

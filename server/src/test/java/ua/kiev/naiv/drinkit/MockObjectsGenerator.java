@@ -18,7 +18,7 @@ public class MockObjectsGenerator {
         recipe.setDescription("desc");
         recipe.setName("Test2");
         recipe.setOptions(new int[]{1, 2});
-        recipe.setCocktailIngredients(new int[][]{{1, 50}, {2, 60}});
+        recipe.setCocktailIngredients(new Integer[][]{{1, 50}, {2, 60}});
         return recipe;
     }
 

@@ -11,7 +11,7 @@ public class Recipe {
     private String description;
     private String name;
     private int[] options;
-    private int[][] cocktailIngredients;
+    private Integer[][] cocktailIngredients;
     private byte[] image;
     private byte[] thumbnail;
     private Integer id;
@@ -64,11 +64,11 @@ public class Recipe {
         return options;
     }
 
-    public void setCocktailIngredients(int[][] cocktailIngredients) {
+    public void setCocktailIngredients(Integer[][] cocktailIngredients) {
         this.cocktailIngredients = cocktailIngredients;
     }
 
-    public int[][] getCocktailIngredients() {
+    public Integer[][] getCocktailIngredients() {
         return cocktailIngredients;
     }
 
