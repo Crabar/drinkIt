@@ -16,6 +16,7 @@ public class TransformUtils {
             return null;
         }
         Recipe recipe = new Recipe();
+        recipe.setId(recipeEntity.getId());
         recipe.setImage(recipeEntity.getImage());
         recipe.setThumbnail(recipeEntity.getThumbnail());
         recipe.setCocktailTypeId(recipeEntity.getCocktailType().getId());
@@ -32,6 +33,7 @@ public class TransformUtils {
 
     public static RecipeEntity transform(Recipe recipe) {
         RecipeEntity recipeEntity = new RecipeEntity();
+        recipeEntity.setId(recipe.getId());
         recipeEntity.setName(recipe.getName());
         recipeEntity.setDescription(recipe.getDescription());
         recipeEntity.setOptions(Arrays.stream(recipe.getOptions()).<Option>mapToObj(Option::new).collect(Collectors.toList()));

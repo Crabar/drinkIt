@@ -37,7 +37,7 @@ public class RecipeServiceImpl implements RecipeService {
     CocktailTypeRepository cocktailTypeRepository;
 
     @Override
-    public int create(Recipe recipe) {
+    public int save(Recipe recipe) {
         return recipeRepository.saveAndFlush(transform(recipe)).getId();
     }
 
@@ -65,13 +65,6 @@ public class RecipeServiceImpl implements RecipeService {
 //        }
 //        LOGGER.info("findByCriteria({}): found {} records", criteria, recipeEntities.size());
 //        return recipeEntities;
-    }
-
-    @Override
-    public void update(int id, Recipe recipe) {
-        RecipeEntity recipeEntity = transform(recipe);
-        recipeEntity.setId(id);
-        recipeRepository.saveAndFlush(recipeEntity);
     }
 
     @Override

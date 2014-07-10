@@ -17,7 +17,7 @@ import java.util.List;
 public interface RecipeService {
 
     @PreAuthorize("hasRole(ROLE_ADMIN)")
-    int create(Recipe recipe);
+    int save(Recipe recipe);
 
     @PreAuthorize("hasRole(ROLE_ADMIN)")
     void delete(int id);
@@ -25,9 +25,6 @@ public interface RecipeService {
     List<Recipe> findAll();
 
     List<Recipe> findByCriteria(Criteria criteria);
-
-    @PreAuthorize("hasRole(ROLE_ADMIN)")
-    void update(int id, Recipe recipeEntity);
 
     Recipe getRecipeById(int id);
 

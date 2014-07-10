@@ -29,10 +29,11 @@ public class RecipeRestIT {
     @Test
     public void recipeTestCase() {
         Recipe recipe = creteMockRecipe();
-        int id = recipeService.create(recipe);
+        int id = recipeService.save(recipe);
         assertEquals(recipe, recipeService.getRecipeById(id));
         recipe.setName("modified");
-        recipeService.update(id, recipe);
+        recipe.setId(id);
+        recipeService.save(recipe);
         assertEquals(recipe, recipeService.getRecipeById(id));
         recipeService.delete(id);
         assertNull(recipeService.getRecipeById(id));

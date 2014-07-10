@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
+import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import java.util.Arrays;
 
@@ -97,15 +98,17 @@ public class RecipeServiceTestCase {
 
     @Test
     public void updateRecipeShouldReturn200() throws Exception {
+        Recipe recipe = creteMockRecipe();
+        recipe.setId(1);
         mockMvc.perform(put("/cocktails/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(creteMockRecipe())))
+                .content(objectMapper.writeValueAsBytes(recipe)))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void createRecipeShouldReturnId() throws Exception {
-        when(recipeService.create(creteMockRecipe())).thenReturn(1);
+        when(recipeService.save(creteMockRecipe())).thenReturn(1);
         String json = objectMapper.writeValueAsString(creteMockRecipe());
         mockMvc.perform(post("/cocktails").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

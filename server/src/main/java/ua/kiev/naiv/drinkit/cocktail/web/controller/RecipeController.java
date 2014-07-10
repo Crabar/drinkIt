@@ -8,6 +8,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import ua.kiev.naiv.drinkit.cocktail.common.JsonMixIn;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
@@ -45,7 +46,8 @@ public class RecipeController {
 //    @ResponseStatus(HttpStatus.OK)
 //    @ResponseBody
     public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe){
-        return new HttpEntity<>(recipeService.create(recipe));
+        Assert.isNull(recipe.getId());
+        return new HttpEntity<>(recipeService.save(recipe));
     }
 
 
@@ -74,7 +76,8 @@ public class RecipeController {
     @RequestMapping(value = "{recipeId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe){
-        recipeService.update(recipeId, recipe);
+        Assert.isTrue(recipeId == recipe.getId(), "id from uri and id from json should be identical");
+        recipeService.save(recipe);
     }
 
 }

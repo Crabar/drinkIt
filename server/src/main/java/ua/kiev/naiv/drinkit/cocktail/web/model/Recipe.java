@@ -14,6 +14,15 @@ public class Recipe {
     private int[][] cocktailIngredients;
     private byte[] image;
     private byte[] thumbnail;
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public byte[] getImage() {
         return image;
@@ -79,7 +88,7 @@ public class Recipe {
         Recipe recipe = (Recipe) o;
 
         if (cocktailTypeId != recipe.cocktailTypeId) return false;
-        if (!description.equals(recipe.description)) return false;
+        if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
         if (!Arrays.equals(image, recipe.image)) return false;
         if (!name.equals(recipe.name)) return false;
         if (!Arrays.equals(options, recipe.options)) return false;
@@ -91,9 +100,9 @@ public class Recipe {
     @Override
     public int hashCode() {
         int result = cocktailTypeId;
-        result = 31 * result + description.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + name.hashCode();
-        result = 31 * result + Arrays.hashCode(options);
+        result = 31 * result + (options != null ? Arrays.hashCode(options) : 0);
         result = 31 * result + (image != null ? Arrays.hashCode(image) : 0);
         result = 31 * result + (thumbnail != null ? Arrays.hashCode(thumbnail) : 0);
         return result;
@@ -102,11 +111,11 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" +
-                "cocktailIngredients=" + Arrays.toString(cocktailIngredients) +
-                ", options=" + Arrays.toString(options) +
-                ", name='" + name + '\'' +
+                "cocktailTypeId=" + cocktailTypeId +
                 ", description='" + description + '\'' +
-                ", cocktailTypeId=" + cocktailTypeId +
+                ", name='" + name + '\'' +
+                ", options=" + Arrays.toString(options) +
+                ", id=" + id +
                 '}';
     }
 }
