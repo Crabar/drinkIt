@@ -5,12 +5,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeEntity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeResource;
 
 public interface RecipeService {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    int save(Recipe recipe);
+    int save(RecipeResource recipeResource);
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     void delete(int id);

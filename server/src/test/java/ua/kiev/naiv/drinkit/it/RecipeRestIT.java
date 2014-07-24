@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeResource;
 import ua.kiev.naiv.drinkit.springconfig.AppConfig;
 
 import static org.junit.Assert.assertEquals;
@@ -25,13 +25,13 @@ public class RecipeRestIT {
 
     @Test
     public void recipeTestCase() {
-        Recipe recipe = creteMockRecipe();
-        int id = recipeService.save(recipe);
-        assertEquals(recipe, recipeService.getRecipeById(id));
-        recipe.setName("modified");
+        RecipeResource recipeResource = creteMockRecipe();
+        int id = recipeService.save(recipeResource);
+        assertEquals(recipeResource, recipeService.getRecipeById(id));
+        recipeResource.setName("modified");
 //        recipe.setId(id);
-        recipeService.save(recipe);
-        assertEquals(recipe, recipeService.getRecipeById(id));
+        recipeService.save(recipeResource);
+        assertEquals(recipeResource, recipeService.getRecipeById(id));
         recipeService.delete(id);
         assertNull(recipeService.getRecipeById(id));
     }

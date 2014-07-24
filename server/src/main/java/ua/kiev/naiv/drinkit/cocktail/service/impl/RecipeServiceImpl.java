@@ -8,7 +8,7 @@ import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.SearchSpecification;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeResource;
 
 import javax.annotation.Resource;
 
@@ -21,8 +21,8 @@ public class RecipeServiceImpl implements RecipeService {
     RecipeRepository recipeRepository;
 
     @Override
-    public int save(Recipe recipe) {
-        return recipeRepository.saveAndFlush(transform(recipe)).getId();
+    public int save(RecipeResource recipeResource) {
+        return recipeRepository.saveAndFlush(transform(recipeResource)).getId();
     }
 
     @Override

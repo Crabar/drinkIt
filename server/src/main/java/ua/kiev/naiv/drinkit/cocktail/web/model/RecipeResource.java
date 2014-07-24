@@ -5,7 +5,7 @@ import org.springframework.hateoas.ResourceSupport;
 import java.util.Arrays;
 
 @SuppressWarnings("RedundantIfStatement")
-public class Recipe extends ResourceSupport {
+public class RecipeResource extends ResourceSupport {
 
     private int cocktailTypeId;
     private String description;
@@ -85,14 +85,15 @@ public class Recipe extends ResourceSupport {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Recipe recipe = (Recipe) o;
+        RecipeResource recipeResource = (RecipeResource) o;
 
-        if (cocktailTypeId != recipe.cocktailTypeId) return false;
-        if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
-        if (!Arrays.equals(image, recipe.image)) return false;
-        if (!name.equals(recipe.name)) return false;
-        if (!Arrays.equals(options, recipe.options)) return false;
-        if (!Arrays.equals(thumbnail, recipe.thumbnail)) return false;
+        if (cocktailTypeId != recipeResource.cocktailTypeId) return false;
+        if (description != null ? !description.equals(recipeResource.description) : recipeResource.description != null)
+            return false;
+        if (!Arrays.equals(image, recipeResource.image)) return false;
+        if (!name.equals(recipeResource.name)) return false;
+        if (!Arrays.equals(options, recipeResource.options)) return false;
+        if (!Arrays.equals(thumbnail, recipeResource.thumbnail)) return false;
 
         return true;
     }

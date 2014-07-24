@@ -8,21 +8,21 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-public class RecipeJsonTest {
+public class RecipeResourceJsonTest {
     ObjectMapper objectMapper = new ObjectMapper();
     @Test
     public void readWriteJson() throws IOException {
-        Recipe mockRecipe = MockObjectsGenerator.creteMockRecipe();
+        RecipeResource mockRecipeResource = MockObjectsGenerator.creteMockRecipe();
 //        mockRecipe.setId(1);
-        String json = objectMapper.writeValueAsString(mockRecipe);
+        String json = objectMapper.writeValueAsString(mockRecipeResource);
         System.out.println(json);
-        Recipe parsedRecipe = objectMapper.readValue(json, Recipe.class);
-        assertEquals(mockRecipe, parsedRecipe);
+        RecipeResource parsedRecipeResource = objectMapper.readValue(json, RecipeResource.class);
+        assertEquals(mockRecipeResource, parsedRecipeResource);
     }
 
     @Test
     public void readJson() throws IOException {
-        objectMapper.readValue(getClass().getResource("recipe.json"), Recipe.class);
+        objectMapper.readValue(getClass().getResource("recipe.json"), RecipeResource.class);
     }
 
 }

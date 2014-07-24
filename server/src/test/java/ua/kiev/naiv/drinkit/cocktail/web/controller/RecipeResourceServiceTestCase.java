@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeResource;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static ua.kiev.naiv.drinkit.MockObjectsGenerator.creteMockRecipe;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RecipeServiceTestCase {
+public class RecipeResourceServiceTestCase {
 
     @InjectMocks
     RecipeController recipeController = new RecipeController();
@@ -79,11 +79,11 @@ public class RecipeServiceTestCase {
 
     @Test
     public void updateRecipeShouldReturn200() throws Exception {
-        Recipe recipe = creteMockRecipe();
+        RecipeResource recipeResource = creteMockRecipe();
 //        recipe.setId(1);
         mockMvc.perform(put("/recipes/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsBytes(recipe)))
+                .content(objectMapper.writeValueAsBytes(recipeResource)))
                 .andExpect(status().isOk());
     }
 

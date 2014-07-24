@@ -1,6 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeResource;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -28,22 +28,22 @@ public class TransformUtils {
 //        return recipe;
 //    }
 
-    public static RecipeEntity transform(Recipe recipe) {
+    public static RecipeEntity transform(RecipeResource recipeResource) {
         RecipeEntity recipeEntity = new RecipeEntity();
 //        recipeEntity.setId(recipe.getId());
-        recipeEntity.setName(recipe.getName());
-        recipeEntity.setDescription(recipe.getDescription());
-        recipeEntity.setOptions(Arrays.stream(recipe.getOptions()).<Option>mapToObj(Option::new).collect(Collectors.toList()));
-        recipeEntity.setCocktailType(new CocktailType(recipe.getCocktailTypeId()));
-        recipeEntity.setIngredientsWithQuantities(Arrays.stream(recipe.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
+        recipeEntity.setName(recipeResource.getName());
+        recipeEntity.setDescription(recipeResource.getDescription());
+        recipeEntity.setOptions(Arrays.stream(recipeResource.getOptions()).<Option>mapToObj(Option::new).collect(Collectors.toList()));
+        recipeEntity.setCocktailType(new CocktailType(recipeResource.getCocktailTypeId()));
+        recipeEntity.setIngredientsWithQuantities(Arrays.stream(recipeResource.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
             IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
             ingredientWithQuantity.setQuantity(val[1]);
             ingredientWithQuantity.setRecipeEntity(recipeEntity);
             ingredientWithQuantity.setIngredient(new Ingredient(val[0]));
             return ingredientWithQuantity;
         }).collect(Collectors.toList()));
-        recipeEntity.setImage(recipe.getImage());
-        recipeEntity.setThumbnail(recipe.getThumbnail());
+        recipeEntity.setImage(recipeResource.getImage());
+        recipeEntity.setThumbnail(recipeResource.getThumbnail());
         return recipeEntity;
     }
 

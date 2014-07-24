@@ -20,7 +20,7 @@ import ua.kiev.naiv.drinkit.cocktail.common.RecipeResourceAssembler;
 import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeEntity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
-import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
+import ua.kiev.naiv.drinkit.cocktail.web.model.RecipeResource;
 
 import java.io.IOException;
 
@@ -38,7 +38,7 @@ public class RecipeController {
 	@RequestMapping(value = "/{recipeId}", method = RequestMethod.GET)
 	@ResponseBody
     @Transactional(readOnly = true)
-	public Recipe getRecipeById(@PathVariable int recipeId) {
+    public RecipeResource getRecipeById(@PathVariable int recipeId) {
         return recipeResourceAssembler.toResource(recipeService.getRecipeById(recipeId));
     }
 
@@ -46,10 +46,10 @@ public class RecipeController {
     @Transactional
 //    @ResponseStatus(HttpStatus.OK)
 //    @ResponseBody
-    public HttpEntity<Integer> createRecipe(@RequestBody Recipe recipe){
-        Assert.isNull(recipe.getId());
-        LoggerUtils.logOperation("Creating recipe", recipe);
-        return new HttpEntity<>(recipeService.save(recipe));
+    public HttpEntity<Integer> createRecipe(@RequestBody RecipeResource recipeResource) {
+        Assert.isNull(recipeResource.getId());
+        LoggerUtils.logOperation("Creating recipe", recipeResource);
+        return new HttpEntity<>(recipeService.save(recipeResource));
     }
 
 
@@ -58,7 +58,7 @@ public class RecipeController {
 //    @JsonMixIn(value = RecipeSearchResultMixin.class, targetClass = Recipe.class)
     public
     @ResponseBody
-    PagedResources<Recipe> searchRecipes(@RequestParam(value = "criteria", required = false) String json, Pageable pageable,
+    PagedResources<RecipeResource> searchRecipes(@RequestParam(value = "criteria", required = false) String json, Pageable pageable,
                                          PagedResourcesAssembler<RecipeEntity> assembler) {
         Page<RecipeEntity> recipes;
         if (json != null) {
@@ -86,10 +86,10 @@ public class RecipeController {
 
     @RequestMapping(value = "{recipeId}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
-    public void updateRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe){
+    public void updateRecipe(@PathVariable int recipeId, @RequestBody RecipeResource recipeResource) {
 //        Assert.isTrue(recipeId == recipe.getId(), "id from uri and id from json should be identical");
-        LoggerUtils.logOperation("Updating recipe", recipe);
-        recipeService.save(recipe);
+        LoggerUtils.logOperation("Updating recipe", recipeResource);
+        recipeService.save(recipeResource);
     }
 
 }
