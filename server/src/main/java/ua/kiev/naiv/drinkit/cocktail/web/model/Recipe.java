@@ -1,9 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.web.model;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import java.util.Arrays;
 
 @SuppressWarnings("RedundantIfStatement")
-public class Recipe {
+public class Recipe extends ResourceSupport {
 
     private int cocktailTypeId;
     private String description;
@@ -12,15 +14,15 @@ public class Recipe {
     private Integer[][] cocktailIngredients;
     private byte[] image;
     private byte[] thumbnail;
-    private Integer id;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    private Integer id;
+//
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public byte[] getImage() {
         return image;
@@ -106,16 +108,17 @@ public class Recipe {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", cocktailTypeId=" + cocktailTypeId +
-                ", options=" + Arrays.toString(options) +
-                ", image=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(image, 0, 5)) + "...") +
-                ", thumbnail=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return null;
+//        return "Recipe{" +
+////                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", description='" + description + '\'' +
+//                ", cocktailTypeId=" + cocktailTypeId +
+//                ", options=" + Arrays.toString(options) +
+//                ", image=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(image, 0, 5)) + "...") +
+//                ", thumbnail=" + (image == null ? "null" : Arrays.toString(Arrays.copyOfRange(thumbnail, 0, 5)) + "...") +
+//                '}';
+//    }
 }

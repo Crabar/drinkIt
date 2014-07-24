@@ -87,9 +87,18 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>1.2.0.RELEASE</version>
+            <version>1.5.2.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+            <version>1.7.2.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>0.15.0.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -215,7 +224,8 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <properties>
-                <maven.compiler.executable>${env.OPENSHIFT_WILDFLY_DIR}usr/lib/jvm/jdk1.8.0_05/bin/javac</maven.compiler.executable>
+                <maven.compiler.executable>${env.OPENSHIFT_WILDFLY_DIR}usr/lib/jvm/jdk1.8.0_05/bin/javac
+                </maven.compiler.executable>
                 <maven.compiler.fork>true</maven.compiler.fork>
             </properties>
             <build>

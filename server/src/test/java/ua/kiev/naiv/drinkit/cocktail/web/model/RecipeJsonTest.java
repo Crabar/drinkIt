@@ -13,7 +13,7 @@ public class RecipeJsonTest {
     @Test
     public void readWriteJson() throws IOException {
         Recipe mockRecipe = MockObjectsGenerator.creteMockRecipe();
-        mockRecipe.setId(1);
+//        mockRecipe.setId(1);
         String json = objectMapper.writeValueAsString(mockRecipe);
         System.out.println(json);
         Recipe parsedRecipe = objectMapper.readValue(json, Recipe.class);

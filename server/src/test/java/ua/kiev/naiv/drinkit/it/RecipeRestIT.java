@@ -29,7 +29,7 @@ public class RecipeRestIT {
         int id = recipeService.save(recipe);
         assertEquals(recipe, recipeService.getRecipeById(id));
         recipe.setName("modified");
-        recipe.setId(id);
+//        recipe.setId(id);
         recipeService.save(recipe);
         assertEquals(recipe, recipeService.getRecipeById(id));
         recipeService.delete(id);

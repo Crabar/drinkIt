@@ -8,29 +8,29 @@ import java.util.stream.Collectors;
 public class TransformUtils {
 
 
-    public static Recipe transform(RecipeEntity recipeEntity) {
-        if(recipeEntity == null){
-            return null;
-        }
-        Recipe recipe = new Recipe();
-        recipe.setId(recipeEntity.getId());
-        recipe.setImage(recipeEntity.getImage());
-        recipe.setThumbnail(recipeEntity.getThumbnail());
-        recipe.setCocktailTypeId(recipeEntity.getCocktailType().getId());
-        recipe.setDescription(recipeEntity.getDescription());
-        recipe.setName(recipeEntity.getName());
-        recipe.setCocktailIngredients(recipeEntity.getIngredientsWithQuantities().stream()
-                .<Integer[]>map(val -> new Integer[]{val.getIngredient().getId(), val.getQuantity()})
-                .toArray(Integer[][]::new));
-        recipe.setOptions(recipeEntity.getOptions().stream()
-                .mapToInt(Option::getId)
-                .toArray());
-        return recipe;
-    }
+//    public static Recipe transform(RecipeEntity recipeEntity) {
+//        if(recipeEntity == null){
+//            return null;
+//        }
+//        Recipe recipe = new Recipe();
+////        recipe.setId(recipeEntity.getId());
+//        recipe.setImage(recipeEntity.getImage());
+//        recipe.setThumbnail(recipeEntity.getThumbnail());
+//        recipe.setCocktailTypeId(recipeEntity.getCocktailType().getId());
+//        recipe.setDescription(recipeEntity.getDescription());
+//        recipe.setName(recipeEntity.getName());
+//        recipe.setCocktailIngredients(recipeEntity.getIngredientsWithQuantities().stream()
+//                .<Integer[]>map(val -> new Integer[]{val.getIngredient().getId(), val.getQuantity()})
+//                .toArray(Integer[][]::new));
+//        recipe.setOptions(recipeEntity.getOptions().stream()
+//                .mapToInt(Option::getId)
+//                .toArray());
+//        return recipe;
+//    }
 
     public static RecipeEntity transform(Recipe recipe) {
         RecipeEntity recipeEntity = new RecipeEntity();
-        recipeEntity.setId(recipe.getId());
+//        recipeEntity.setId(recipe.getId());
         recipeEntity.setName(recipe.getName());
         recipeEntity.setDescription(recipe.getDescription());
         recipeEntity.setOptions(Arrays.stream(recipe.getOptions()).<Option>mapToObj(Option::new).collect(Collectors.toList()));

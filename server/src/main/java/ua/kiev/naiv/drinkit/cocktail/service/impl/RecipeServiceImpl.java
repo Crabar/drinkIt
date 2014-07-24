@@ -1,8 +1,9 @@
 package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteria;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils;
+import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeEntity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.SearchSpecification;
@@ -10,8 +11,6 @@ import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.model.Recipe;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils.transform;
 
@@ -31,24 +30,26 @@ public class RecipeServiceImpl implements RecipeService {
         recipeRepository.delete(id);
     }
 
+//    @Override
+//    public List<Recipe> findAll() {
+//        return recipeRepository.findAll().stream()
+//                .map(TransformUtils::transform)
+//                .collect(Collectors.toList());
+//    }
+
     @Override
-    public List<Recipe> findAll() {
-        return recipeRepository.findAll().stream()
-                .map(TransformUtils::transform)
-                .collect(Collectors.toList());
+    public Page<RecipeEntity> findByCriteria(Criteria criteria, Pageable pageable) {
+        return recipeRepository.findAll(SearchSpecification.byCriteria(criteria), pageable);
     }
 
     @Override
-    public List<Recipe> findByCriteria(Criteria criteria) {
-        return recipeRepository.findAll(SearchSpecification.byCriteria(criteria)).stream()
-                .sorted(new RecipeComparatorByCriteria(criteria))
-                .map(TransformUtils::transform)
-                .collect(Collectors.toList());
+    public RecipeEntity getRecipeById(int id) {
+        return recipeRepository.findOne(id);
     }
 
     @Override
-    public Recipe getRecipeById(int id) {
-        return transform(recipeRepository.findOne(id));
+    public Page<RecipeEntity> findAll(Pageable pageable) {
+        return recipeRepository.findAll(pageable);
     }
 
 
