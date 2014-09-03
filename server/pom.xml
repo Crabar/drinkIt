@@ -215,7 +215,7 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <properties>
-                <maven.compiler.executable>$OPENSHIFT_DATA_DIR/jdk1.8.0_20/bin/javac</maven.compiler.executable>
+                <maven.compiler.executable>${env.OPENSHIFT_DATA_DIR}jdk1.8.0_20/bin/javac</maven.compiler.executable>
                 <maven.compiler.fork>true</maven.compiler.fork>
             </properties>
             <build>
