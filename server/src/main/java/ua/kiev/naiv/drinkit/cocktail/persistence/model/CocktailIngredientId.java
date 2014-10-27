@@ -1,8 +1,11 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import java.io.Serializable;
@@ -14,7 +17,7 @@ public class CocktailIngredientId implements Serializable {
     private RecipeEntity recipeEntity;
     private Ingredient ingredient;
 
-    @ManyToOne
+    @ManyToOne()
     public RecipeEntity getRecipeEntity() {
         return recipeEntity;
     }
@@ -23,7 +26,8 @@ public class CocktailIngredientId implements Serializable {
         this.recipeEntity = recipeEntity;
     }
 
-    @ManyToOne()
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)//todo figure out
+    @ManyToOne(fetch = FetchType.LAZY)
     public Ingredient getIngredient() {
         return ingredient;
     }

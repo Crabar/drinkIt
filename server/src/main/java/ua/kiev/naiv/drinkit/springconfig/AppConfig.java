@@ -37,9 +37,10 @@ public class AppConfig {
     }
 
     @Bean
-    public Flyway flyway(){
+    public Flyway flyway() {
         Flyway flyway = new Flyway();
         flyway.setDataSource(dataSource());
+        flyway.setValidateOnMigrate(false);
         flyway.setCleanOnValidationError(true);
         flyway.migrate();
         return flyway;
@@ -61,6 +62,8 @@ public class AppConfig {
         hibernateProperties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
         hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql", "false"));
         hibernateProperties.setProperty("hibernate.format_sql", env.getProperty("hibernate.format_sql", "false"));
+        hibernateProperties.setProperty("hibernate.cache.use_second_level_cache", String.valueOf(true));
+        hibernateProperties.setProperty("hibernate.cache.region.factory_class", "org.hibernate.cache.ehcache.EhCacheRegionFactory");
         return hibernateProperties;
     }
 

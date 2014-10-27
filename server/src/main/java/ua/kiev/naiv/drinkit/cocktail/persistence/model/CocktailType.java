@@ -1,12 +1,16 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @SuppressWarnings("unused")
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "recipe_types")
 public class CocktailType implements Serializable {
 

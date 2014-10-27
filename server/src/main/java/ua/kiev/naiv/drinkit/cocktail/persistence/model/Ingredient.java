@@ -1,11 +1,15 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("unused")
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Table(name = "ingredients")
 public class Ingredient {
 
@@ -60,7 +64,7 @@ public class Ingredient {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.ingredient")
+    @OneToMany(mappedBy = "cocktailIngredientId.ingredient", fetch = FetchType.LAZY)
     public Set<IngredientWithQuantity> getCocktailIngredients() {
         return cocktailIngredients;
     }

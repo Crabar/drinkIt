@@ -1,12 +1,18 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cacheable
 @Table(name = "recipes", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "name")
@@ -61,6 +67,7 @@ public class RecipeEntity implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "type_id")
+    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
     public CocktailType getCocktailType() {
         return cocktailType;
     }
@@ -69,7 +76,7 @@ public class RecipeEntity implements Serializable {
         this.cocktailType = cocktailType;
     }
 
-    @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cocktailIngredientId.recipeEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<IngredientWithQuantity> getIngredientsWithQuantities() {
         return ingredientsWithQuantities;
     }
@@ -82,6 +89,7 @@ public class RecipeEntity implements Serializable {
     @JoinTable(name = "recipes_has_options",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "option_id"))
+    @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
     public List<Option> getOptions() {
         return options;
     }
@@ -108,12 +116,45 @@ public class RecipeEntity implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.REMOVE)
     public List<RecipeStatistics> getRecipeStatistics() {
         return recipeStatistics;
     }
 
     public void setRecipeStatistics(List<RecipeStatistics> recipeStatistics) {
         this.recipeStatistics = recipeStatistics;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RecipeEntity that = (RecipeEntity) o;
+
+        if (!cocktailType.equals(that.cocktailType)) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (!id.equals(that.id)) return false;
+        if (!Arrays.equals(image, that.image)) return false;
+        if (ingredientsWithQuantities != null ? !ingredientsWithQuantities.equals(that.ingredientsWithQuantities) : that.ingredientsWithQuantities != null)
+            return false;
+        if (!name.equals(that.name)) return false;
+        if (options != null ? !options.equals(that.options) : that.options != null) return false;
+        if (!Arrays.equals(thumbnail, that.thumbnail)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + cocktailType.hashCode();
+        result = 31 * result + (ingredientsWithQuantities != null ? ingredientsWithQuantities.hashCode() : 0);
+        result = 31 * result + (options != null ? options.hashCode() : 0);
+        result = 31 * result + (image != null ? Arrays.hashCode(image) : 0);
+        result = 31 * result + (thumbnail != null ? Arrays.hashCode(thumbnail) : 0);
+        return result;
     }
 }

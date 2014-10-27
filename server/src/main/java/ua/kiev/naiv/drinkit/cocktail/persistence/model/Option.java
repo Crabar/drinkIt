@@ -1,9 +1,13 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.model;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 
 @SuppressWarnings("unused")
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "recipe_options", uniqueConstraints = {
         @UniqueConstraint(columnNames = "id"),
         @UniqueConstraint(columnNames = "option")
