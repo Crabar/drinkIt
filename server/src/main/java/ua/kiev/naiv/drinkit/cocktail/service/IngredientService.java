@@ -1,7 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.service;
 
 import ua.kiev.naiv.drinkit.cocktail.exception.RecipesFoundException;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.Ingredient;
 
 import java.util.List;
 

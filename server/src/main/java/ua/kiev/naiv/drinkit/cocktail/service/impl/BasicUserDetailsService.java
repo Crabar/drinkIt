@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ua.kiev.naiv.drinkit.cocktail.common.DetailedUser;
 import ua.kiev.naiv.drinkit.cocktail.common.Role;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.User;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.UserRepository;
 
 import javax.annotation.Resource;

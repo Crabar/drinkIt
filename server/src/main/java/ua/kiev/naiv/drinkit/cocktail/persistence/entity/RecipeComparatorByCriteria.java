@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.persistence.model;
+package ua.kiev.naiv.drinkit.cocktail.persistence.entity;
 
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 

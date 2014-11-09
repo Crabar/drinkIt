@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.User;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.User;
 import ua.kiev.naiv.drinkit.cocktail.service.impl.BasicUserDetailsService;
 
 @Controller

@@ -387,5 +387,10 @@
             <version>2.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>ma.glasnost.orika</groupId>
+            <artifactId>orika-core</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 </project>

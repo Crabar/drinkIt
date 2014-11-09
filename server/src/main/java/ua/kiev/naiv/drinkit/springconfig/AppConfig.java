@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ua.kiev.naiv.drinkit.cocktail.mapping.DtoMapper;
 
 import javax.annotation.Resource;
 import java.util.Properties;
@@ -22,6 +23,11 @@ public class AppConfig {
 
     @Resource
     Environment env;
+
+    @Bean
+    public DtoMapper dtoMapper() {
+        return new DtoMapper();
+    }
 
     @Bean
     public DriverManagerDataSource dataSource() {
@@ -50,7 +56,7 @@ public class AppConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean sessionFactory = new LocalContainerEntityManagerFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.cocktail.persistence.model");
+        sessionFactory.setPackagesToScan("ua.kiev.naiv.drinkit.cocktail.persistence.entity");
         sessionFactory.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         sessionFactory.setJpaProperties(hibProperties());
         return sessionFactory;

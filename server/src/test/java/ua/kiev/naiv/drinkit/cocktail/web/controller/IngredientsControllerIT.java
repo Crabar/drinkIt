@@ -2,7 +2,7 @@ package ua.kiev.naiv.drinkit.cocktail.web.controller;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
 import java.util.List;

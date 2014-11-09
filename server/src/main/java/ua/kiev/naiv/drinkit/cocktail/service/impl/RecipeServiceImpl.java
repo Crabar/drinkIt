@@ -1,13 +1,10 @@
 package ua.kiev.naiv.drinkit.cocktail.service.impl;
 
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.common.aspect.EnableStats;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Recipe;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeComparatorByCriteria;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils;
-import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
+import ua.kiev.naiv.drinkit.cocktail.mapping.DtoMapper;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.Recipe;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.RecipeRepository;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.Criteria;
 import ua.kiev.naiv.drinkit.cocktail.persistence.search.SearchSpecification;
@@ -18,9 +15,7 @@ import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static ua.kiev.naiv.drinkit.cocktail.persistence.model.TransformUtils.transform;
 
 @Service
 @Transactional
@@ -33,14 +28,11 @@ public class RecipeServiceImpl implements RecipeService {
     private RecipeRepository recipeRepository;
 
     @Resource
-    private IngredientRepository ingredientRepository;
-
-    @Resource
-    private Environment environment;
+    private DtoMapper dtoMapper;
 
     @Override
-    public RecipeDto save(RecipeDto recipeDto) {
-        return transform(recipeRepository.saveAndFlush(transform(recipeDto, ingredientRepository)));
+    public void save(RecipeDto recipeDto) {
+        recipeRepository.saveAndFlush(dtoMapper.map(recipeDto, Recipe.class));
     }
 
     @Override
@@ -51,33 +43,26 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Transactional(readOnly = true)
     public List<RecipeDto> findAll() {
-        return recipeRepository.findAll().stream()
-                .map(TransformUtils::transform)
-                .collect(Collectors.toList());
+        return dtoMapper.mapAsList(recipeRepository.findAll(), RecipeDto.class);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<RecipeDto> findByCriteria(Criteria criteria) {
-        return recipeRepository.findAll(SearchSpecification.byCriteria(criteria)).stream()
-                .sorted(new RecipeComparatorByCriteria(criteria))
-                .map(TransformUtils::transform)
-                .collect(Collectors.toList());
+        return dtoMapper.mapAsList(recipeRepository.findAll(SearchSpecification.byCriteria(criteria)), RecipeDto.class);
     }
 
     @Override
     @EnableStats
     @Transactional(readOnly = true)
     public RecipeDto getRecipeById(int id) {
-        return transform(recipeRepository.findOne(id));
+        return dtoMapper.map(recipeRepository.findOne(id), RecipeDto.class);
     }
 
 
     @Override
     public List<RecipeDto> findByRecipeNameContaining(String namePart) {
-        return recipeRepository.findByNameContaining(namePart).stream()
-                .map(TransformUtils::transform)
-                .collect(Collectors.toList());
+        return dtoMapper.mapAsList(recipeRepository.findByNameContaining(namePart), RecipeDto.class);
     }
 
 

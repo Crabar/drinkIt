@@ -1,4 +1,4 @@
-package ua.kiev.naiv.drinkit.cocktail.persistence.model;
+package ua.kiev.naiv.drinkit.cocktail.persistence.entity;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;

@@ -38,7 +38,7 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Before
     public void insertTestRecipe() {
-        insertedRecipeDto = recipeService.save(createNewRecipe());
+//        insertedRecipeDto = recipeService.save(createNewRecipe());
     }
 
 

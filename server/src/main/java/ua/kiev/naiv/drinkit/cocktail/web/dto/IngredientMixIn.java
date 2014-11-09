@@ -1,7 +1,7 @@
 package ua.kiev.naiv.drinkit.cocktail.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.IngredientWithQuantity;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.IngredientWithQuantity;
 
 import java.util.Set;
 

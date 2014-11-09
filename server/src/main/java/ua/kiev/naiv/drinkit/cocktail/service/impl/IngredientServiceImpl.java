@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.exception.RecipesFoundException;
 import ua.kiev.naiv.drinkit.cocktail.exception.RecordNotFoundException;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.IngredientWithQuantity;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.IngredientWithQuantity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 

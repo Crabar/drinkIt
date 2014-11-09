@@ -3,7 +3,7 @@ package ua.kiev.naiv.drinkit.cocktail.persistence.search;
 import org.hibernate.jpa.criteria.CriteriaBuilderImpl;
 import org.hibernate.jpa.criteria.predicate.InPredicate;
 import org.springframework.data.jpa.domain.Specification;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.*;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.*;
 
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;

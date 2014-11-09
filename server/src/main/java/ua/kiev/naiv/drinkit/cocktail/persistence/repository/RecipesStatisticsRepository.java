@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.RecipeStatistics;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.RecipeStatistics;
 
 public interface RecipesStatisticsRepository extends JpaRepository<RecipeStatistics, RecipeStatistics.PrimaryKey> {
 

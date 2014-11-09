@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 import ua.kiev.naiv.drinkit.cocktail.common.WebContextFilter;
-import ua.kiev.naiv.drinkit.cocktail.persistence.model.Ingredient;
+import ua.kiev.naiv.drinkit.cocktail.persistence.entity.Ingredient;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 import ua.kiev.naiv.drinkit.cocktail.web.dto.IngredientMixIn;
 import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
