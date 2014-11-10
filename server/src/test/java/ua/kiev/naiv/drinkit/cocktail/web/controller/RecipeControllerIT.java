@@ -9,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import ua.kiev.naiv.drinkit.cocktail.service.RecipeService;
 import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeDto;
-import ua.kiev.naiv.drinkit.cocktail.web.dto.RecipeSearchResultMixin;
 
 import java.util.Collections;
 
@@ -38,7 +37,7 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Before
     public void insertTestRecipe() {
-//        insertedRecipeDto = recipeService.save(createNewRecipe());
+//        insertedRecipeDto = recipeService.save(createNewRecipeDto());
     }
 
 
@@ -62,11 +61,11 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
     public void testCreateRecipe() throws Exception {
         mockMvc.perform(
                 post(RESOURCE_ENDPOINT)
-                        .content(objectMapper.writeValueAsBytes(createNewRecipe()))
+                        .content(objectMapper.writeValueAsBytes(createNewRecipeDto()))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.name").value(createNewRecipe().getName()));
+                .andExpect(jsonPath("$.name").value(createNewRecipeDto().getName()));
     }
 
     @Test
@@ -115,7 +114,6 @@ public class RecipeControllerIT extends AbstractRestMockMvc {
 
     @Test
     public void testFindRecipesByNamePart() throws Exception {
-        objectMapper.addMixInAnnotations(RecipeDto.class, RecipeSearchResultMixin.class);
         mockMvc.perform(get(RESOURCE_ENDPOINT).param("namePart", "Integration Tests"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(Collections.singletonList(insertedRecipeDto))));

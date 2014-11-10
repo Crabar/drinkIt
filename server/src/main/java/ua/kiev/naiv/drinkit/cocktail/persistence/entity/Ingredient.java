@@ -1,8 +1,6 @@
 package ua.kiev.naiv.drinkit.cocktail.persistence.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @SuppressWarnings("unused")
 @Entity
@@ -13,7 +11,7 @@ public class Ingredient {
     private String name;
     private Integer vol;
     private String description;
-    private Set<IngredientWithQuantity> cocktailIngredients = new HashSet<>();
+//    private Set<IngredientWithQuantity> cocktailIngredients = new HashSet<>();
 
     public Ingredient() {
     }
@@ -60,14 +58,14 @@ public class Ingredient {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "recipeIngredientId.ingredient")
-    public Set<IngredientWithQuantity> getCocktailIngredients() {
-        return cocktailIngredients;
-    }
-
-    public void setCocktailIngredients(Set<IngredientWithQuantity> ingredientWithQuantities) {
-        this.cocktailIngredients = ingredientWithQuantities;
-    }
+//    @OneToMany(mappedBy = "recipeIngredientId.ingredient")
+//    public Set<IngredientWithQuantity> getCocktailIngredients() {
+//        return cocktailIngredients;
+//    }
+//
+//    public void setCocktailIngredients(Set<IngredientWithQuantity> ingredientWithQuantities) {
+//        this.cocktailIngredients = ingredientWithQuantities;
+//    }
 
     @Override
     public String toString() {

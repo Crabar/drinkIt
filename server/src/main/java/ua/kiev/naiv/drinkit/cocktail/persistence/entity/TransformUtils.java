@@ -54,10 +54,10 @@ public class TransformUtils {
         recipe.setIngredientsWithQuantities(Arrays.stream(recipeDto.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
             IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
             ingredientWithQuantity.setQuantity(val[1]);
-            ingredientWithQuantity.setrecipe(recipe);
+            ingredientWithQuantity.setRecipe(recipe);
             Ingredient ingredientById = ingredientRepository.findOne(val[0]);
             if (ingredientById == null) throw new EmptyResultDataAccessException(1);
-            ingredientById.getCocktailIngredients().add(ingredientWithQuantity);
+//            ingredientById.getCocktailIngredients().add(ingredientWithQuantity);
             ingredientWithQuantity.setIngredient(ingredientById);
             return ingredientWithQuantity;
         }).collect(Collectors.toList()));

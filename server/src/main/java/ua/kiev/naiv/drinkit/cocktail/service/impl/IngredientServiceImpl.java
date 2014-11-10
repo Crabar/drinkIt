@@ -8,12 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.kiev.naiv.drinkit.cocktail.exception.RecipesFoundException;
 import ua.kiev.naiv.drinkit.cocktail.exception.RecordNotFoundException;
 import ua.kiev.naiv.drinkit.cocktail.persistence.entity.Ingredient;
-import ua.kiev.naiv.drinkit.cocktail.persistence.entity.IngredientWithQuantity;
 import ua.kiev.naiv.drinkit.cocktail.persistence.repository.IngredientRepository;
 import ua.kiev.naiv.drinkit.cocktail.service.IngredientService;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -58,11 +56,11 @@ public class IngredientServiceImpl implements IngredientService {
         if (ingredient == null) {
             throw new RecordNotFoundException("Ingredient not found : " + id);
         }
-        Set<IngredientWithQuantity> cocktailIngredients = ingredient.getCocktailIngredients();
-        if (cocktailIngredients.isEmpty()) {
-            ingredientRepository.delete(id);
-        } else {
-            throw new RecipesFoundException(cocktailIngredients.size());
-        }
+//        Set<IngredientWithQuantity> cocktailIngredients = ingredient.getCocktailIngredients();//todo
+//        if (cocktailIngredients.isEmpty()) {
+//            ingredientRepository.delete(id);
+//        } else {
+//            throw new RecipesFoundException(cocktailIngredients.size());
+//        }
     }
 }

@@ -48,4 +48,29 @@ public class CocktailType implements Serializable {
     public void setRecipeEntities(Set<Recipe> recipeEntities) {
         this.recipeEntities = recipeEntities;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CocktailType that = (CocktailType) o;
+
+        if (!id.equals(that.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "CocktailType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
