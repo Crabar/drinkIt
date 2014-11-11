@@ -48,8 +48,10 @@ public class RecipeIngredientId implements Serializable {
 
         RecipeIngredientId that = (RecipeIngredientId) o;
 
-        if (!ingredient.equals(that.ingredient)) return false;
-        if (!recipe.equals(that.recipe)) return false;
+        if (ingredient.getId() != null ? !ingredient.getId().equals(that.ingredient.getId()) : that.ingredient.getId() != null)
+            return false;
+        if (recipe.getId() != null ? !recipe.getId().equals(that.recipe.getId()) : that.recipe.getId() != null)
+            return false;
 
         return true;
     }

@@ -65,8 +65,7 @@ public class IngredientWithQuantity implements Serializable {
         IngredientWithQuantity that = (IngredientWithQuantity) o;
 
         if (quantity != null ? !quantity.equals(that.quantity) : that.quantity != null) return false;
-        if (recipeIngredientId != null ? !recipeIngredientId.equals(that.recipeIngredientId) : that.recipeIngredientId != null)
-            return false;
+        if (!recipeIngredientId.equals(that.recipeIngredientId)) return false;
 
         return true;
     }
@@ -74,7 +73,7 @@ public class IngredientWithQuantity implements Serializable {
     @Override
     public int hashCode() {
         int result = quantity != null ? quantity.hashCode() : 0;
-        result = 31 * result + (recipeIngredientId != null ? recipeIngredientId.hashCode() : 0);
+        result = 31 * result + recipeIngredientId.hashCode();
         return result;
     }
 }

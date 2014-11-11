@@ -1,7 +1,9 @@
 package ua.kiev.naiv.drinkit.cocktail.mapping;
 
 import ma.glasnost.orika.CustomConverter;
+import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.converter.BidirectionalConverter;
 import ma.glasnost.orika.converter.ConverterFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -40,27 +42,14 @@ public class DtoMapper extends ConfigurableMapper {
             }
         });
 
-        converterFactory.registerConverter(new BidirectionalConverter<List<IngredientWithQuantity>, Integer[][]>() {
+        converterFactory.registerConverter(new CustomConverter<List<IngredientWithQuantity>, Integer[][]>() {
             @Override
-            public Integer[][] convertTo(List<IngredientWithQuantity> ingredientWithQuantities, Type<Integer[][]> type) {
+            public Integer[][] convert(List<IngredientWithQuantity> ingredientWithQuantities, Type<? extends Integer[][]> destinationType) {
                 return ingredientWithQuantities.stream()
                         .<Integer[]>map(ingredientWithQuantity -> new Integer[]{ingredientWithQuantity.getIngredient().getId(), ingredientWithQuantity.getQuantity()})
                         .toArray(Integer[][]::new);
             }
 
-            @Override
-            public List<IngredientWithQuantity> convertFrom(Integer[][] integers, Type<List<IngredientWithQuantity>> type) {
-                return Arrays.stream(integers).<IngredientWithQuantity>map(val -> {
-                    IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
-                    ingredientWithQuantity.setQuantity(val[1]);
-                    ingredientWithQuantity.setRecipe(null);//todo
-                    Ingredient ingredientById = ingredientRepository.findOne(val[0]);
-                    Assert.notNull(ingredientById);
-//                    ingredientById.getCocktailIngredients().add(ingredientWithQuantity);
-                    ingredientWithQuantity.setIngredient(ingredientById);
-                    return ingredientWithQuantity;
-                }).collect(Collectors.toList());
-            }
         });
 
 //        new ObjectFactory<List<IngredientWithQuantity>, Integer[][]>(){
@@ -85,12 +74,26 @@ public class DtoMapper extends ConfigurableMapper {
         });
 
 
-
         factory.classMap(Recipe.class, RecipeDto.class)
                 .fieldMap("imageFileName", "imageUrl").converter(FILE_NAME_TO_URL_CONVERTER).add()
                 .fieldMap("thumbnailFileName", "thumbnailUrl").converter(FILE_NAME_TO_URL_CONVERTER).add()
                 .field("cocktailType.id", "cocktailTypeId")
-                .field("ingredientsWithQuantities", "cocktailIngredients")
+                .fieldAToB("ingredientsWithQuantities", "cocktailIngredients")
+                .customize(new CustomMapper<Recipe, RecipeDto>() {
+                    @Override
+                    public void mapBtoA(RecipeDto recipeDto, Recipe recipe, MappingContext context) {
+                        recipe.setIngredientsWithQuantities(Arrays.stream(recipeDto.getCocktailIngredients()).<IngredientWithQuantity>map(val -> {
+                            IngredientWithQuantity ingredientWithQuantity = new IngredientWithQuantity();
+                            ingredientWithQuantity.setQuantity(val[1]);
+                            ingredientWithQuantity.setRecipe(recipe);
+                            Ingredient ingredientById = ingredientRepository.findOne(val[0]);
+                            Assert.notNull(ingredientById);
+                            ingredientWithQuantity.setIngredient(ingredientById);
+                            ingredientById.getCocktailIngredients().add(ingredientWithQuantity);
+                            return ingredientWithQuantity;
+                        }).collect(Collectors.toList()));
+                    }
+                })
                 .byDefault()
                 .register();
     }
