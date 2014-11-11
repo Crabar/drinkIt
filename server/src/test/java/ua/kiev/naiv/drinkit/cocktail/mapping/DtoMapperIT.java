@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 import static org.junit.Assert.assertEquals;
 
-public class DtoMapperTest extends AbstractBaseTest {
+public class DtoMapperIT extends AbstractBaseTest {
     @Resource
     DtoMapper dtoMapper;
 
