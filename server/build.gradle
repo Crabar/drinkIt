@@ -19,6 +19,20 @@ task integTest(type: Test, dependsOn: "test") {
     setTestNameIncludePattern("*IT*")
 }
 
+
+war {
+    dependsOn ':client:compileFlex'
+    from(project(':client').compileFlex)
+//    if(true){
+    destinationDir = file('deployments')
+    archiveName = 'ROOT.war'
+//    }
+
+}
+task deploy(dependsOn: ':server:assemble') << {
+    println 'deploy to dir'
+}
+
 //Project dependencies
 dependencies {
     compile "org.springframework:spring-core:$springVersion"
