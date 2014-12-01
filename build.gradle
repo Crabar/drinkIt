@@ -1,0 +1,8 @@
+task deploy(dependsOn:':client:build') << {
+    println "asd"
+    tasks["test2"].execute()
+}
+
+task test2 << {
+    println "test"
+}

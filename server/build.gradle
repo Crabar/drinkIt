@@ -1,23 +1,26 @@
 apply plugin: 'java'
 apply plugin: 'war'
 
-version = '1.0'
+//version = '1.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 def springVersion = "latest.release"
 
-
-// 1. Get dependencies from Maven local repository
-// 2. Get dependencies from Maven central repository
 repositories {
-//    mavenLocal()
     mavenCentral()
+}
+
+test {
+    setTestNameIncludePattern("*Test")
+}
+
+task integTest(type: Test, dependsOn: "test") {
+    setTestNameIncludePattern("*IT*")
 }
 
 //Project dependencies
 dependencies {
-    compile group: "activation", name: "activation", version
     compile "org.springframework:spring-core:$springVersion"
     compile "org.springframework:spring-context:$springVersion"
     compile "org.springframework:spring-beans:$springVersion"
@@ -50,5 +53,4 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-all:latest.release'
     testCompile 'commons-io:commons-io:latest.release'
     compile 'ma.glasnost.orika:orika-core:latest.release'
-
 }
