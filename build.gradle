@@ -2,8 +2,6 @@ apply plugin: 'idea'
 
 idea {
     project {
-        //if you want to set specific jdk and language level
-        jdkName = '1.8'
-        languageLevel = '1.8'
+        languageLevel = '1.8'//todo figure out
     }
 }
