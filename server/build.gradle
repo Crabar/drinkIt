@@ -21,11 +21,11 @@ task integTest(type: Test, dependsOn: "test") {
 
 
 war {
-    dependsOn ':client:compileFlex'
+    dependsOn ':client:createHtmlWrapper'
     from(project(':client').compileFlex)
 //    if(true){
-    destinationDir = file('deployments')
-    archiveName = 'ROOT.war'
+//    destinationDir = file('deployments')
+//    archiveName = 'ROOT.war'
 //    }
 
 }

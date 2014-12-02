@@ -38,7 +38,14 @@ dependencies {
 }
 
 sdkAutoInstall {
-    showPrompts	= false
+    showPrompts = false
+}
+
+htmlWrapper {
+    title = 'DrinkIt'
+    file = "index.html"
+//    percentHeight = 80
+//    percentWidth  = 80
 }
 
 //air {
