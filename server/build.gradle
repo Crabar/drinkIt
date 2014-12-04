@@ -17,7 +17,19 @@ task integTest(type: Test, dependsOn: "test") {
     setTestNameIncludePattern("*IT*")
 }
 
-//Project dependencies
+war.destinationDir = file("$buildDir/war")
+
+/**
+ * Building for Different Environments
+ * Example: gradle build -Penv=dev
+ */
+if (project.hasProperty('env')) {
+    println "Target environment: $env"
+    sourceSets.main.resources.srcDir "src/main/environment/$env"
+}
+
+
+
 dependencies {
     compile "org.springframework:spring-core:$springVersion"
     compile "org.springframework:spring-context:$springVersion"

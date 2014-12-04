@@ -26,7 +26,6 @@ repositories {
 
 dependencies {
     flexSDK group: 'com.adobe', name: 'flex_sdk', version: '4.6', ext: 'zip'
-//    airSDK group: 'com.adobe', name: 'AdobeAIRSDK', version: '15.0', ext: 'zip'
     merged files('libs/com/google/code/as3corelib/1.3/as3corelib-1.3.swc')
     merged group: 'com.adobe.flex.framework', name: 'flex_sdk', version: '4.6', ext: 'zip'
 }

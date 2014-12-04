@@ -1,4 +1,4 @@
-package guru.drinkit;
+package guru.drinkit.springconfig;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
