@@ -3,5 +3,7 @@ jdk:
   - oraclejdk8
 script:
   - gradlew integTest -Penv=travis
+before_install:
+   - chmod +x gradlew
 before_script:
   - mysql -e 'create database drinkit;'
