@@ -2,7 +2,6 @@ language: java
 jdk:
   - oraclejdk8
 script:
-  - cd server
-  - gradle integTest -Penv=travis -u
+  - gradlew integTest -Penv=travis
 before_script:
   - mysql -e 'create database drinkit;'
