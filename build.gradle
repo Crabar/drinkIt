@@ -5,3 +5,12 @@ idea {
         languageLevel = '1.8'//todo figure out
     }
 }
+
+evaluationDependsOn("client")
+project('server') {
+    apply plugin: 'war'
+    war {
+        dependsOn ':client:createHtmlWrapper'
+        from(project(':client').compileFlex)
+    }
+}

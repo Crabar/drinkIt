@@ -1,8 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'war'
 
-//version = '1.0'
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 def springVersion = "latest.release"
@@ -17,20 +15,6 @@ test {
 
 task integTest(type: Test, dependsOn: "test") {
     setTestNameIncludePattern("*IT*")
-}
-
-
-war {
-    dependsOn ':client:createHtmlWrapper'
-    from(project(':client').compileFlex)
-//    if(true){
-//    destinationDir = file('deployments')
-//    archiveName = 'ROOT.war'
-//    }
-
-}
-task deploy(dependsOn: ':server:assemble') << {
-    println 'deploy to dir'
 }
 
 //Project dependencies

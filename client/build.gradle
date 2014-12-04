@@ -11,7 +11,6 @@ buildscript {
 apply plugin: 'gradlefx'
 
 type = 'swf'
-//version = '1.0'
 srcDirs = ['src']
 mainClass = 'Main';
 frameworkLinkage = 'merged'
@@ -21,13 +20,8 @@ repositories {
     ivy {
         name 'Adobe'
         artifactPattern 'http://download.macromedia.com/pub/flex/sdk/[module]_[revision].[ext]'
-//        artifactPattern 'http://download.macromedia.com/pub/flex/sdk/flex_sdk_4.6.zip'
     }
 
-//    ivy {
-//        name 'Adobe Air SDK'
-//        artifactPattern 'http://download.macromedia.com/air/win/download/[revision]/[module].[ext]'
-//    }
 }
 
 dependencies {
@@ -42,13 +36,9 @@ sdkAutoInstall {
 }
 
 htmlWrapper {
+    createHtmlWrapper.dependsOn compileFlex
+    resourceDirs = ['html-template']
     title = 'DrinkIt'
     file = "index.html"
-//    percentHeight = 80
-//    percentWidth  = 80
+    source = 'index.template.html'
 }
-
-//air {
-//    storepass = 'gradlefx'
-//    includeFileTrees = [fileTree(dir: 'src/main/actionscript/', include: 'assets/appIcon.png')]
-//}
