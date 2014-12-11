@@ -54,8 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatcher("/rest/**")
                 .addFilterAfter(digestAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/rest/admin/**").hasRole("ADMIN")
-        ;
+                .antMatchers("/rest/userbar/**").authenticated();
     }
 
     @Bean
